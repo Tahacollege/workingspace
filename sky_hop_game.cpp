@@ -1,6 +1,6 @@
 #include<graphics.h>
 #include<windows.h>
-#include<iostream>
+#include<stdio.h>
 int main(){
     int gd=DETECT,gm;
     initgraph(&gd,&gm,(char *)"");
@@ -9,10 +9,12 @@ int main(){
     int w1=initwindow(x,y,"",-3,-3);
     setcurrentwindow(w1);
     int page=0,i=850;
+    int jump_up_lower_block=140;
+    int jump_left_lower_block=340;
+    int jump_right_lower_block=140;
+    int ball_x=720;
+    int ball_y=740;
     while(i>=0){
-        if(i==0){
-            getch();
-        }
     page=1-page; 
     setactivepage(page);
     setvisualpage(1-page);
@@ -29,6 +31,18 @@ int main(){
     //setcolor(BLACK); 
     //{lowest layer   ---> 4th layer from the top
     // 1st land from the left
+    if(GetAsyncKeyState(VK_UP)){
+            ball_y=ball_y-jump_up_lower_block;
+            jump_up_lower_block=jump_up_lower_block+20;
+        }
+    if(GetAsyncKeyState(VK_LEFT)){
+            ball_x=ball_x-jump_left_lower_block;
+            //jump_left_lower_block=jump_left_lower_block+20;
+        }
+    if(GetAsyncKeyState(VK_RIGHT)){
+            ball_x=ball_x+jump_right_lower_block;
+            //jump_right_lower_block=jump_right_lower_block+20;
+        }
     setfillstyle(SOLID_FILL,WHITE);
     bar(10,800,150,770);
     // 2nd land from the left
@@ -114,7 +128,7 @@ int main(){
     circle(750,100,70);
     setfillstyle(SLASH_FILL,MAGENTA);
     floodfill(0,0,WHITE);
-    circle(720,740,30);
+    circle(ball_x,ball_y,30);
     setfillstyle(SOLID_FILL,LIGHTBLUE);
     floodfill(0,0,WHITE);
     //{water
