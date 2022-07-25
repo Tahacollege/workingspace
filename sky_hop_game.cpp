@@ -10,8 +10,8 @@ int main(){
     setcurrentwindow(w1);
     int page=0,i=850;
     int jump_up_lower_block=140;
-    int jump_left_lower_block=340;
-    int jump_right_lower_block=140;
+    int jump_left_lower_block=320;
+    int jump_right_lower_block=320;
     int ball_x=720;
     int ball_y=740;
     while(i>=0){
