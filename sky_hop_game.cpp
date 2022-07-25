@@ -12,9 +12,16 @@ int main(){
     int jump_up_lower_block=140;
     int jump_left_lower_block=320;
     int jump_right_lower_block=320;
+    int jump_up_upper_block=150;
+    int jump_left_upper_block=320;
+    int jump_right_upper_block=320;
     int ball_x=720;
     int ball_y=740;
-    while(i>=0){
+    int ball2_x=550;
+    int ball2_y=660;
+    //int style_change=0;
+    int color_change=0;
+    while(i>=0 ||color_change!=16){
     page=1-page; 
     setactivepage(page);
     setvisualpage(1-page);
@@ -32,14 +39,18 @@ int main(){
     //{lowest layer   ---> 4th layer from the top
     // 1st land from the left
     if(GetAsyncKeyState(VK_UP)){
+            ball2_y=ball2_y-jump_up_upper_block;
             ball_y=ball_y-jump_up_lower_block;
+            jump_up_upper_block=jump_up_upper_block+25;
             jump_up_lower_block=jump_up_lower_block+20;
         }
     if(GetAsyncKeyState(VK_LEFT)){
+            ball2_x=ball2_x-jump_left_lower_block;
             ball_x=ball_x-jump_left_lower_block;
             //jump_left_lower_block=jump_left_lower_block+20;
         }
     if(GetAsyncKeyState(VK_RIGHT)){
+            ball2_x=ball2_x+jump_right_lower_block;
             ball_x=ball_x+jump_right_lower_block;
             //jump_right_lower_block=jump_right_lower_block+20;
         }
@@ -126,9 +137,25 @@ int main(){
     setfillstyle(SOLID_FILL,YELLOW);
     floodfill(20,40,WHITE);
     circle(750,100,70);
+    
+    //ball_controled_by_user{
     setfillstyle(SLASH_FILL,MAGENTA);
     floodfill(0,0,WHITE);
     circle(ball_x,ball_y,30);
+    //}
+    //ball_controled_by_computer{
+    setfillstyle(BKSLASH_FILL,color_change);
+    floodfill(0,0,WHITE);
+    circle(ball2_x,ball2_y,40);
+    //if(style_change==13 && color_change==15){
+    if(color_change==16){
+        //style_change=0;
+        color_change=0;
+        //delay(1000);
+    }
+    //style_change++;
+    color_change++;
+    //}
     setfillstyle(SOLID_FILL,LIGHTBLUE);
     floodfill(0,0,WHITE);
     //{water
@@ -146,7 +173,6 @@ int main(){
     page=1-page;
     i--;
     delay(100);
-    
     //}
     //}
     }
